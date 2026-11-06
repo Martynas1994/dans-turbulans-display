@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="lt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111316">
+    <meta name="stats-url" content="../data/stats.json">
+    <meta name="stats-refresh-ms" content="300000">
+    <meta name="stats-stale-after-hours" content="12">
+    <meta name="stats-mode" content="public">
+    <title>dans turbulans · LED 32×8</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div><p class="eyebrow">DANS TURBULANS</p><h1>LED matrica <span>32×8</span></h1></div>
+        </div>
+        <div id="modeBadge" class="mode-badge"><span class="pulse"></span> Vietinis JSON</div>
+      </header>
+
+      <main class="layout">
+        <section class="display-column" aria-label="LED ekrano peržiūra">
+          <div class="display-frame">
+            <div class="display-rim">
+              <div id="matrix" class="matrix" role="img" aria-label="32 stulpelių ir 8 eilučių raudonų LED matrica"></div>
+            </div>
+            <div class="frame-caption"><span>MAX7219 · 256 LED</span><span id="frameStatus">JUNGIAMASI</span></div>
+          </div>
+
+          <div class="now-card">
+            <div class="now-icon" aria-hidden="true"><span></span></div>
+            <div class="now-copy"><p class="eyebrow">DABAR RODOMA</p><h2 id="nowTitle">Laukiama duomenų…</h2><p id="nowMeta" class="muted">Nuskaitomas data/stats.json</p></div>
+            <div id="nowValue" class="now-value">—</div>
+          </div>
+
+          <div class="platform-strip" id="platformStrip" aria-label="Platformų būsena"></div>
+          <p class="footnote">Ekranas veikia naršyklėje. Duomenų nuskaitymas atskirtas nuo 32×8 taškų atvaizdavimo.</p>
+        </section>
+
+        <aside class="controls" aria-label="Ekrano nustatymai">
+          <div class="section-heading"><div><p class="eyebrow">NUSTATYMAI</p><h2>Ekrano valdymas</h2></div><button id="refreshButton" class="icon-button" title="Perskaityti stats.json iš naujo" aria-label="Atnaujinti duomenis">↻</button></div>
+
+          <label class="control-block">
+            <span class="control-title"><span>Pokyčio kadro trukmė</span><output id="changeDurationOutput">2.5 s</output></span>
+            <input id="changeDurationInput" type="range" min="1" max="6" step="0.5" value="2.5">
+          </label>
+
+          <label class="control-block">
+            <span class="control-title"><span>Pagrindinio kadro trukmė</span><output id="mainDurationOutput">7 s</output></span>
+            <input id="mainDurationInput" type="range" min="2" max="12" step="0.5" value="7">
+          </label>
+
+          <label class="control-block">
+            <span class="control-title"><span>Vertikalus perėjimas</span><output id="transitionOutput">600 ms</output></span>
+            <input id="transitionInput" type="range" min="300" max="1000" step="50" value="600">
+          </label>
+
+          <label class="control-block">
+            <span class="control-title"><span>Ryškumas</span><output id="brightnessOutput">68%</output></span>
+            <input id="brightnessInput" type="range" min="12" max="100" step="1" value="68">
+          </label>
+
+          <label class="control-block select-block">
+            <span class="control-title"><span>Skaičių formatas</span></span>
+            <select id="formatInput">
+              <option value="auto">Kompaktiškas, kai reikia</option>
+              <option value="exact">Tikslus skaičius</option>
+            </select>
+          </label>
+
+          <label class="toggle-row">
+            <span><strong>Rodyti nežinomą pokytį kaip --</strong><small>Išjungus pokyčio kadras praleidžiamas</small></span>
+            <input id="unknownChangeInput" type="checkbox" checked>
+          </label>
+
+          <div class="control-block order-block">
+            <div class="control-title"><span>Platformų eilė</span><span class="muted small">perkelk mygtukais</span></div>
+            <ol id="orderList" class="order-list"></ol>
+          </div>
+
+          <label class="toggle-row optional-row">
+            <span><strong>YT kanalo peržiūros</strong><small id="channelViewsHint">Papildomas rodinys, kai reikšmė yra</small></span>
+            <input id="channelViewsInput" type="checkbox" disabled>
+          </label>
+
+          <div class="divider"></div>
+          <div class="control-title simulation-title"><span>Bandymo režimai</span><span class="tag">NEKEIČIA JSON</span></div>
+
+          <label class="toggle-row">
+            <span><strong>Demonstraciniai duomenys</strong><small>Kiti pavyzdiniai skaičiai, tik naršyklėje</small></span>
+            <input id="demoInput" type="checkbox">
+          </label>
+
+          <label class="toggle-row">
+            <span><strong>Imituoti pasenusius duomenis</strong><small>Pridėti OLD žymą prie rodmens</small></span>
+            <input id="staleInput" type="checkbox">
+          </label>
+
+          <label class="control-block select-block error-select">
+            <span class="control-title"><span>Imituoti rinkimo klaidą</span></span>
+            <select id="errorInput">
+              <option value="none">Klaidų nėra</option>
+              <option value="youtube">YouTube</option>
+              <option value="spotify">Spotify</option>
+              <option value="instagram">Instagram</option>
+              <option value="facebook">Facebook</option>
+              <option value="all">Visos platformos</option>
+            </select>
+          </label>
+
+          <p id="loadError" class="load-error" role="status" hidden></p>
+          <button id="refreshTextButton" class="refresh-button">↻ <span>Perskaityti statistiką iš naujo</span></button>
+          <p class="auto-note"><span class="live-dot"></span> Statistikos rinkimas vyksta atskirai; rodomas tik JSON failas.</p>
+        </aside>
+      </main>
+      <footer><span>vieši profiliai · be prisijungimo</span><span id="dataModeFootnote">vietinis JSON · skaitomas iš disko</span></footer>
+    </div>
+    <script src="matrix.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

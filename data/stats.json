@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-11-06T19:44:59+00:00",
+  "platforms": {
+    "youtube": {
+      "status": "ok",
+      "last_successful_at": "2026-11-06T19:44:59+00:00",
+      "fetched_at": "2026-11-06T19:44:59+00:00",
+      "metrics": {
+        "subscribers": {
+          "value": 374,
+          "metric": "subscribers",
+          "fetched_at": "2026-11-06T19:44:59+00:00",
+          "status": "ok",
+          "stale": false,
+          "change_24h": null
+        }
+      }
+    },
+    "spotify": {
+      "status": "ok",
+      "last_successful_at": "2026-11-06T19:45:00+00:00",
+      "fetched_at": "2026-11-06T19:45:00+00:00",
+      "metrics": {
+        "monthly_listeners": {
+          "value": 872,
+          "metric": "monthly_listeners",
+          "fetched_at": "2026-11-06T19:45:00+00:00",
+          "status": "ok",
+          "stale": false,
+          "change_24h": null
+        }
+      }
+    },
+    "instagram": {
+      "status": "ok",
+      "last_successful_at": "2026-11-06T19:45:00+00:00",
+      "fetched_at": "2026-11-06T19:45:00+00:00",
+      "metrics": {
+        "followers": {
+          "value": 1502,
+          "metric": "followers",
+          "fetched_at": "2026-11-06T19:45:00+00:00",
+          "status": "ok",
+          "stale": false,
+          "change_24h": null
+        }
+      }
+    },
+    "facebook": {
+      "status": "ok",
+      "last_successful_at": "2026-11-06T19:45:01+00:00",
+      "fetched_at": "2026-11-06T19:45:01+00:00",
+      "metrics": {
+        "followers": {
+          "value": 625,
+          "metric": "followers",
+          "fetched_at": "2026-11-06T19:45:01+00:00",
+          "status": "ok",
+          "stale": false,
+          "change_24h": null
+        }
+      }
+    }
+  }
+}
