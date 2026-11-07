@@ -4,9 +4,9 @@
   root.Matrix32x8 = api;
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
-  const WIDTH = 32, HEIGHT = 8, LEFT_MARGIN = 1, GLYPH_W = 3, GLYPH_H = 5, GAP = 1;
-  // Five-row, three-column bitmap glyphs, encoded one row per string.
-  const FONT = {
+  const WIDTH = 32, HEIGHT = 8, LEFT_MARGIN = 1, GLYPH_W = 3, GLYPH_H = 6, GAP = 1;
+  // Two hand-drawn bitmap sets. Both stay 3 pixels wide for compact messages.
+  const FONT_3X5 = {
     " ":["000","000","000","000","000"], A:["010","101","111","101","101"], B:["110","101","110","101","110"],
     C:["011","100","100","100","011"], D:["110","101","101","101","110"], E:["111","100","110","100","111"],
     F:["111","100","110","100","100"], G:["011","100","101","101","011"], H:["101","101","111","101","101"],
@@ -20,9 +20,30 @@
     "3":["110","001","010","001","110"], "4":["101","101","111","001","001"], "5":["111","100","110","001","110"],
     "6":["011","100","110","101","010"], "7":["111","001","010","010","010"], "8":["010","101","010","101","010"],
     "9":["010","101","011","001","110"], "+":["000","010","111","010","000"], "-":["000","000","111","000","000"],
-    ".":["000","000","000","000","010"], ":":["000","010","000","010","000"], "/":["001","001","010","100","100"],
+    ".":["000","000","000","000","010"], [":"]:["000","010","000","010","000"], "/":["001","001","010","100","100"],
     "?":["110","001","010","000","010"]
   };
+  const FONT_3X6 = {
+    " ":["000","000","000","000","000","000"], A:["010","101","101","111","101","101"], B:["110","101","110","101","101","110"],
+    C:["011","100","100","100","100","011"], D:["110","101","101","101","101","110"], E:["111","100","110","100","100","111"],
+    F:["111","100","110","100","100","100"], G:["011","100","101","101","101","011"], H:["101","101","111","101","101","101"],
+    I:["111","010","010","010","010","111"], J:["001","001","001","001","101","010"], K:["101","101","110","100","110","101"],
+    L:["100","100","100","100","100","111"], M:["101","111","111","101","101","101"], N:["101","111","111","111","101","101"],
+    O:["010","101","101","101","101","010"], P:["110","101","110","100","100","100"], Q:["010","101","101","101","111","011"],
+    R:["110","101","110","101","101","101"], S:["011","100","010","001","001","110"], T:["111","010","010","010","010","010"],
+    U:["101","101","101","101","101","111"], V:["101","101","101","101","010","010"], W:["101","101","101","111","111","101"],
+    X:["101","101","010","010","101","101"], Y:["101","101","010","010","010","010"], Z:["111","001","010","010","100","111"],
+    "0":["111","101","101","101","101","111"], "1":["010","110","010","010","010","111"], "2":["110","001","001","010","100","111"],
+    "3":["110","001","010","001","001","110"], "4":["101","101","101","111","001","001"], "5":["111","100","110","001","001","110"],
+    "6":["011","100","110","101","101","010"], "7":["111","001","010","010","010","010"], "8":["010","101","010","101","101","010"],
+    "9":["010","101","101","011","001","110"], "+":["000","010","010","111","010","010"], "-":["000","000","000","111","000","000"],
+    ".":["000","000","000","000","000","010"], [":"]:["000","010","000","000","010","000"], "/":["001","001","010","010","100","100"],
+    "?":["110","001","001","010","000","010"]
+  };
+  const FONTS = { "3x5": FONT_3X5, "3x6": FONT_3X6 };
+  let activeFont = "3x6";
+  function setFont(name) { if (FONTS[name]) activeFont = name; return activeFont; }
+  function glyphHeight() { return FONTS[activeFont].A.length; }
 
   function formatValue(value, mode = "auto") {
     if (value === null || value === undefined || value === "") return "--";
@@ -54,15 +75,15 @@
   function textWidth(text) { const n = String(text).length; return n ? LEFT_MARGIN + n * GLYPH_W + (n - 1) * GAP : LEFT_MARGIN; }
   function patternFor(text) {
     const normalized = String(text).toUpperCase(), width = Math.max(0, normalized.length ? normalized.length * (GLYPH_W + GAP) - GAP : 0);
-    const rows = Array.from({ length: GLYPH_H }, () => Array(width).fill(false));
-    [...normalized].forEach((char, i) => (FONT[char] || FONT["?"]).forEach((row, y) => [...row].forEach((bit, x) => { rows[y][i * (GLYPH_W + GAP) + x] = bit === "1"; })));
+    const font = FONTS[activeFont], rows = Array.from({ length: glyphHeight() }, () => Array(width).fill(false));
+    [...normalized].forEach((char, i) => (font[char] || font["?"]).forEach((row, y) => [...row].forEach((bit, x) => { rows[y][i * (GLYPH_W + GAP) + x] = bit === "1"; })));
     return rows;
   }
   function frameFor(pattern, offset = 0) {
     const textCols = pattern[0]?.length || 0, frame = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(false));
     const maxOffset = Math.max(0, textCols + LEFT_MARGIN - WIDTH);
     const scroll = maxOffset ? Math.max(0, Math.min(maxOffset, Math.floor(offset))) : 0;
-    for (let y = 0; y < GLYPH_H; y++) for (let sx = 0; sx < textCols; sx++) {
+    for (let y = 0; y < pattern.length; y++) for (let sx = 0; sx < textCols; sx++) {
       const x = LEFT_MARGIN + sx - scroll;
       if (x > 0 && x < WIDTH && pattern[y][sx]) frame[y + 1][x] = true;
     }
@@ -73,7 +94,7 @@
     const cols = pattern[0]?.length || 0;
     const maxOffset = Math.max(0, cols - (rightBound - leftBound));
     const scroll = Math.max(0, Math.min(maxOffset, Math.floor(offset)));
-    for (let sy = 0; sy < GLYPH_H; sy++) for (let sx = scroll; sx < cols; sx++) {
+    for (let sy = 0; sy < pattern.length; sy++) for (let sx = scroll; sx < cols; sx++) {
       const x = startX + sx - scroll;
       if (x >= leftBound && x < rightBound && pattern[sy][sx]) frame[sy + 1][x] = true;
     }
@@ -116,5 +137,5 @@
     else frames.push({ kind: "current", text: buildMessage(code, metric.value, { format: options.format || "auto" }) });
     return frames.map((frame) => ({ ...frame, width: textWidth(frame.text), pattern: patternFor(frame.text) }));
   }
-  return { WIDTH, HEIGHT, LEFT_MARGIN, GLYPH_W, GLYPH_H, GAP, FONT, formatValue, formatDelta, buildMessage, sequenceIndex, metricFromStats, textWidth, patternFor, frameFor, labelRegionStart, labeledFrame, verticalTransitionFrame, verticalTransitionRegion, makePlatformFrames };
+  return { WIDTH, HEIGHT, LEFT_MARGIN, GLYPH_W, GLYPH_H, GAP, FONT: FONT_3X6, FONTS, setFont, glyphHeight, formatValue, formatDelta, buildMessage, sequenceIndex, metricFromStats, textWidth, patternFor, frameFor, labelRegionStart, labeledFrame, verticalTransitionFrame, verticalTransitionRegion, makePlatformFrames };
 });

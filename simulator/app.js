@@ -14,16 +14,17 @@
     instagram: { status: "ok", http_status: 200, metrics: { followers: { value: 1502, change_24h: { value: -3 }, status: "ok" } } },
     facebook: { status: "ok", http_status: 200, metrics: { followers: { value: 625, change_24h: { value: 0 }, status: "ok" } } },
   } };
-  const ids = ["matrix", "modeBadge", "dataModeFootnote", "frameStatus", "nowTitle", "nowMeta", "nowValue", "platformStrip", "changeDurationInput", "changeDurationOutput", "mainDurationInput", "mainDurationOutput", "transitionInput", "transitionOutput", "brightnessInput", "brightnessOutput", "formatInput", "unknownChangeInput", "orderList", "channelViewsInput", "channelViewsHint", "demoInput", "staleInput", "errorInput", "refreshButton", "refreshTextButton", "loadError"];
+  const ids = ["matrix", "modeBadge", "dataModeFootnote", "frameStatus", "nowTitle", "nowMeta", "nowValue", "platformStrip", "changeDurationInput", "changeDurationOutput", "mainDurationInput", "mainDurationOutput", "transitionInput", "transitionOutput", "brightnessInput", "brightnessOutput", "formatInput", "fontInput", "unknownChangeInput", "orderList", "channelViewsInput", "channelViewsHint", "demoInput", "staleInput", "errorInput", "refreshButton", "refreshTextButton", "loadError"];
   const els = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
   const dots = [];
   for (let i = 0; i < Matrix.WIDTH * Matrix.HEIGHT; i++) { const dot = document.createElement("span"); dot.className = "led"; dot.setAttribute("aria-hidden", "true"); els.matrix.append(dot); dots.push(dot); }
   const settings = loadSettings();
+  Matrix.setFont(settings.font);
   let stats = null, lastReadSignature = "", sequence = [], sequenceIndex = 0, phase = "hold", phaseStarted = performance.now();
   let currentItem = null, currentFrame = blankFrame(), previousSignature = "";
   function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
   function loadSettings() {
-    const s = { order: [...DEFAULT_ORDER], changeSeconds: 2.5, mainSeconds: 7, transitionMs: 600, brightness: 68, format: "auto", showChange: true, channelViews: false };
+    const s = { order: [...DEFAULT_ORDER], changeSeconds: 2.5, mainSeconds: 7, transitionMs: 600, brightness: 68, format: "auto", font: "3x6", showChange: true, channelViews: false };
     try { const saved = JSON.parse(localStorage.getItem("dans-turbulans-led-settings") || "{}");
       if (Array.isArray(saved.order)) { const valid = saved.order.filter((p) => DEFAULT_ORDER.includes(p)); s.order = [...new Set([...valid, ...DEFAULT_ORDER])].slice(0, 4); }
       if (Number.isFinite(saved.changeSeconds)) s.changeSeconds = clamp(saved.changeSeconds, 1, 6);
@@ -31,6 +32,7 @@
       if (Number.isFinite(saved.transitionMs)) s.transitionMs = clamp(saved.transitionMs, 300, 1000);
       if (Number.isFinite(saved.brightness)) s.brightness = clamp(saved.brightness, 12, 100);
       if (["auto", "exact"].includes(saved.format)) s.format = saved.format;
+      if (["3x5", "3x6"].includes(saved.font)) s.font = saved.font;
       if (typeof saved.showChange === "boolean") s.showChange = saved.showChange;
       if (typeof saved.channelViews === "boolean") s.channelViews = saved.channelViews;
     } catch (_) { /* Ignore invalid browser preferences. */ }
@@ -173,8 +175,9 @@
     for (const [input, output, key, suffix] of [[els.changeDurationInput, els.changeDurationOutput, "changeSeconds", " s"], [els.mainDurationInput, els.mainDurationOutput, "mainSeconds", " s"], [els.transitionInput, els.transitionOutput, "transitionMs", " ms"], [els.brightnessInput, els.brightnessOutput, "brightness", "%"]]) {
       input.value = settings[key]; updateRange(input, output, suffix); input.addEventListener("input", () => { settings[key] = Number(input.value); updateRange(input, output, suffix); if (key === "brightness") document.documentElement.style.setProperty("--brightness", String(settings.brightness / 100)); saveSettings(); });
     }
-    document.documentElement.style.setProperty("--brightness", String(settings.brightness / 100)); els.formatInput.value = settings.format; els.unknownChangeInput.checked = settings.showChange; els.channelViewsInput.checked = settings.channelViews; renderOrder();
+    document.documentElement.style.setProperty("--brightness", String(settings.brightness / 100)); els.formatInput.value = settings.format; els.fontInput.value = settings.font; els.unknownChangeInput.checked = settings.showChange; els.channelViewsInput.checked = settings.channelViews; renderOrder();
     els.formatInput.addEventListener("change", () => { settings.format = els.formatInput.value; saveSettings(); renderChips(); rebuildSequence(); });
+    els.fontInput.addEventListener("change", () => { settings.font = els.fontInput.value; Matrix.setFont(settings.font); saveSettings(); rebuildSequence(); });
     els.unknownChangeInput.addEventListener("change", () => { settings.showChange = els.unknownChangeInput.checked; saveSettings(); rebuildSequence(); });
     els.channelViewsInput.addEventListener("change", () => { settings.channelViews = els.channelViewsInput.checked; saveSettings(); rebuildSequence(); });
     els.demoInput.addEventListener("change", () => { renderMode(); rebuildSequence(); });
