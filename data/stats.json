@@ -1,45 +1,43 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-10T02:45:03+00:00",
+  "generated_at": "2026-11-10T12:40:27+00:00",
   "platforms": {
     "youtube": {
       "status": "ok",
-      "last_successful_at": "2026-11-10T02:45:00+00:00",
-      "fetched_at": "2026-11-10T02:45:00+00:00",
+      "last_successful_at": "2026-11-10T12:40:26+00:00",
+      "fetched_at": "2026-11-10T12:40:26+00:00",
       "metrics": {
         "subscribers": {
           "value": 374,
           "metric": "subscribers",
-          "fetched_at": "2026-11-10T02:45:00+00:00",
+          "fetched_at": "2026-11-10T12:40:26+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": 0,
+            "value": null,
             "metric": "change_24h",
-            "status": "ok",
-            "fetched_at": "2026-11-10T02:45:00+00:00",
-            "baseline_fetched_at": "2026-11-09T06:32:20+00:00"
+            "status": "unavailable",
+            "fetched_at": "2026-11-10T12:40:26+00:00"
           }
         }
       }
     },
     "spotify": {
       "status": "ok",
-      "last_successful_at": "2026-11-10T02:45:01+00:00",
-      "fetched_at": "2026-11-10T02:45:01+00:00",
+      "last_successful_at": "2026-11-10T12:40:26+00:00",
+      "fetched_at": "2026-11-10T12:40:26+00:00",
       "metrics": {
         "monthly_listeners": {
           "value": 876,
           "metric": "monthly_listeners",
-          "fetched_at": "2026-11-10T02:45:01+00:00",
+          "fetched_at": "2026-11-10T12:40:26+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": -1,
+            "value": null,
             "metric": "change_24h",
-            "status": "ok",
-            "fetched_at": "2026-11-10T02:45:01+00:00",
-            "baseline_fetched_at": "2026-11-09T06:32:21+00:00"
+            "status": "unavailable",
+            "fetched_at": "2026-11-10T12:40:26+00:00"
           }
         }
       }
@@ -61,21 +59,20 @@
     },
     "facebook": {
       "status": "ok",
-      "last_successful_at": "2026-11-10T02:45:02+00:00",
-      "fetched_at": "2026-11-10T02:45:02+00:00",
+      "last_successful_at": "2026-11-10T12:40:26+00:00",
+      "fetched_at": "2026-11-10T12:40:26+00:00",
       "metrics": {
         "followers": {
-          "value": 625,
+          "value": 626,
           "metric": "followers",
-          "fetched_at": "2026-11-10T02:45:02+00:00",
+          "fetched_at": "2026-11-10T12:40:26+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": 0,
+            "value": null,
             "metric": "change_24h",
-            "status": "ok",
-            "fetched_at": "2026-11-10T02:45:02+00:00",
-            "baseline_fetched_at": "2026-11-09T06:32:21+00:00"
+            "status": "unavailable",
+            "fetched_at": "2026-11-10T12:40:26+00:00"
           }
         }
       }
