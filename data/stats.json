@@ -1,23 +1,23 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-13T12:14:39+00:00",
+  "generated_at": "2026-11-13T19:47:32+00:00",
   "platforms": {
     "youtube": {
       "status": "ok",
-      "last_successful_at": "2026-11-13T12:14:35+00:00",
-      "fetched_at": "2026-11-13T12:14:35+00:00",
+      "last_successful_at": "2026-11-13T19:47:30+00:00",
+      "fetched_at": "2026-11-13T19:47:30+00:00",
       "metrics": {
         "subscribers": {
           "value": 374,
           "metric": "subscribers",
-          "fetched_at": "2026-11-13T12:14:35+00:00",
+          "fetched_at": "2026-11-13T19:47:30+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
             "value": 0,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-13T12:14:35+00:00",
+            "fetched_at": "2026-11-13T19:47:30+00:00",
             "baseline_fetched_at": "2026-11-12T16:49:44+00:00"
           }
         }
@@ -25,20 +25,20 @@
     },
     "spotify": {
       "status": "ok",
-      "last_successful_at": "2026-11-13T12:14:36+00:00",
-      "fetched_at": "2026-11-13T12:14:36+00:00",
+      "last_successful_at": "2026-11-13T19:47:31+00:00",
+      "fetched_at": "2026-11-13T19:47:31+00:00",
       "metrics": {
         "monthly_listeners": {
           "value": 878,
           "metric": "monthly_listeners",
-          "fetched_at": "2026-11-13T12:14:36+00:00",
+          "fetched_at": "2026-11-13T19:47:31+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
             "value": 4,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-13T12:14:36+00:00",
+            "fetched_at": "2026-11-13T19:47:31+00:00",
             "baseline_fetched_at": "2026-11-12T16:49:45+00:00"
           }
         }
@@ -61,20 +61,20 @@
     },
     "facebook": {
       "status": "ok",
-      "last_successful_at": "2026-11-13T12:14:38+00:00",
-      "fetched_at": "2026-11-13T12:14:38+00:00",
+      "last_successful_at": "2026-11-13T19:47:32+00:00",
+      "fetched_at": "2026-11-13T19:47:32+00:00",
       "metrics": {
         "followers": {
           "value": 627,
           "metric": "followers",
-          "fetched_at": "2026-11-13T12:14:38+00:00",
+          "fetched_at": "2026-11-13T19:47:32+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
             "value": 1,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-13T12:14:38+00:00",
+            "fetched_at": "2026-11-13T19:47:32+00:00",
             "baseline_fetched_at": "2026-11-12T16:49:46+00:00"
           }
         }
