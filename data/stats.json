@@ -1,45 +1,45 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-19T13:10:19+00:00",
+  "generated_at": "2026-11-19T23:03:49+00:00",
   "platforms": {
     "youtube": {
       "status": "ok",
-      "last_successful_at": "2026-11-19T13:10:15+00:00",
-      "fetched_at": "2026-11-19T13:10:15+00:00",
+      "last_successful_at": "2026-11-19T23:03:47+00:00",
+      "fetched_at": "2026-11-19T23:03:47+00:00",
       "metrics": {
         "subscribers": {
           "value": 376,
           "metric": "subscribers",
-          "fetched_at": "2026-11-19T13:10:15+00:00",
+          "fetched_at": "2026-11-19T23:03:47+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": 1,
+            "value": 0,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-19T13:10:15+00:00",
-            "baseline_fetched_at": "2026-11-18T17:16:27+00:00"
+            "fetched_at": "2026-11-19T23:03:47+00:00",
+            "baseline_fetched_at": "2026-11-19T01:52:47+00:00"
           }
         }
       }
     },
     "spotify": {
       "status": "ok",
-      "last_successful_at": "2026-11-19T13:10:16+00:00",
-      "fetched_at": "2026-11-19T13:10:16+00:00",
+      "last_successful_at": "2026-11-19T23:03:48+00:00",
+      "fetched_at": "2026-11-19T23:03:48+00:00",
       "metrics": {
         "monthly_listeners": {
-          "value": 898,
+          "value": 903,
           "metric": "monthly_listeners",
-          "fetched_at": "2026-11-19T13:10:16+00:00",
+          "fetched_at": "2026-11-19T23:03:48+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": 6,
+            "value": 5,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-19T13:10:16+00:00",
-            "baseline_fetched_at": "2026-11-18T17:16:28+00:00"
+            "fetched_at": "2026-11-19T23:03:48+00:00",
+            "baseline_fetched_at": "2026-11-19T01:52:48+00:00"
           }
         }
       }
@@ -61,21 +61,21 @@
     },
     "facebook": {
       "status": "ok",
-      "last_successful_at": "2026-11-19T13:10:18+00:00",
-      "fetched_at": "2026-11-19T13:10:18+00:00",
+      "last_successful_at": "2026-11-19T23:03:49+00:00",
+      "fetched_at": "2026-11-19T23:03:49+00:00",
       "metrics": {
         "followers": {
           "value": 628,
           "metric": "followers",
-          "fetched_at": "2026-11-19T13:10:18+00:00",
+          "fetched_at": "2026-11-19T23:03:49+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
             "value": 0,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-19T13:10:18+00:00",
-            "baseline_fetched_at": "2026-11-18T17:16:29+00:00"
+            "fetched_at": "2026-11-19T23:03:49+00:00",
+            "baseline_fetched_at": "2026-11-19T01:52:49+00:00"
           }
         }
       }
