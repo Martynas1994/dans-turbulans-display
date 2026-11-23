@@ -1,45 +1,45 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-22T21:54:07+00:00",
+  "generated_at": "2026-11-23T07:40:23+00:00",
   "platforms": {
     "youtube": {
       "status": "ok",
-      "last_successful_at": "2026-11-22T21:54:05+00:00",
-      "fetched_at": "2026-11-22T21:54:05+00:00",
+      "last_successful_at": "2026-11-23T07:40:21+00:00",
+      "fetched_at": "2026-11-23T07:40:21+00:00",
       "metrics": {
         "subscribers": {
           "value": 377,
           "metric": "subscribers",
-          "fetched_at": "2026-11-22T21:54:05+00:00",
+          "fetched_at": "2026-11-23T07:40:21+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
             "value": 1,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-22T21:54:05+00:00",
-            "baseline_fetched_at": "2026-11-21T21:39:53+00:00"
+            "fetched_at": "2026-11-23T07:40:21+00:00",
+            "baseline_fetched_at": "2026-11-22T06:50:36+00:00"
           }
         }
       }
     },
     "spotify": {
       "status": "ok",
-      "last_successful_at": "2026-11-22T21:54:05+00:00",
-      "fetched_at": "2026-11-22T21:54:05+00:00",
+      "last_successful_at": "2026-11-23T07:40:21+00:00",
+      "fetched_at": "2026-11-23T07:40:21+00:00",
       "metrics": {
         "monthly_listeners": {
           "value": 931,
           "metric": "monthly_listeners",
-          "fetched_at": "2026-11-22T21:54:05+00:00",
+          "fetched_at": "2026-11-23T07:40:21+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": 14,
+            "value": 4,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-22T21:54:05+00:00",
-            "baseline_fetched_at": "2026-11-21T21:39:54+00:00"
+            "fetched_at": "2026-11-23T07:40:21+00:00",
+            "baseline_fetched_at": "2026-11-22T06:50:37+00:00"
           }
         }
       }
@@ -61,21 +61,21 @@
     },
     "facebook": {
       "status": "ok",
-      "last_successful_at": "2026-11-22T21:54:06+00:00",
-      "fetched_at": "2026-11-22T21:54:06+00:00",
+      "last_successful_at": "2026-11-23T07:40:21+00:00",
+      "fetched_at": "2026-11-23T07:40:21+00:00",
       "metrics": {
         "followers": {
-          "value": 630,
+          "value": 629,
           "metric": "followers",
-          "fetched_at": "2026-11-22T21:54:06+00:00",
+          "fetched_at": "2026-11-23T07:40:21+00:00",
           "status": "ok",
           "stale": false,
           "change_24h": {
-            "value": 2,
+            "value": 1,
             "metric": "change_24h",
             "status": "ok",
-            "fetched_at": "2026-11-22T21:54:06+00:00",
-            "baseline_fetched_at": "2026-11-21T21:39:54+00:00"
+            "fetched_at": "2026-11-23T07:40:21+00:00",
+            "baseline_fetched_at": "2026-11-22T06:50:37+00:00"
           }
         }
       }
